@@ -1,0 +1,11 @@
+<!--
+  This file exists solely so Netlify's build post-processing detects
+  the "contact" form. Vite strips the hidden form from index.html during
+  build, so we keep a static copy here (public/ is copied as-is to dist/).
+-->
+<form name="contact" data-netlify="true" hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <input type="text" name="subject" />
+  <textarea name="message"></textarea>
+</form>
