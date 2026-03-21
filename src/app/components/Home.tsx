@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { projects } from "../data/projects";
 import profilePic from '../../assets/images/profile.jpg';
-
+import resumeFile from '../../assets/pdfs/Angelika_Kyle_Resume.pdf'; 
 const titles = [
   "Software Engineer",
   "Full-Stack Developer",
@@ -196,14 +196,17 @@ export function Home() {
               </p>
 
               <div className="flex items-center gap-4 mb-12">
-                <motion.button
-                  className="px-8 py-3 bg-[#7ee787] text-black font-medium rounded-lg hover:bg-[#6dd777] transition-colors flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  View CV
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
+                <motion.a
+                href={resumeFile} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-8 py-3 bg-[#7ee787] text-black font-medium rounded-lg hover:bg-[#6dd777] transition-colors flex items-center gap-2 w-fit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View CV
+                <ArrowRight className="w-4 h-4" />
+              </motion.a>
 
                 <div className="flex items-center gap-3">
                   {[
