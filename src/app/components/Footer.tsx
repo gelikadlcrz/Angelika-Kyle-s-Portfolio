@@ -20,9 +20,9 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: Github, href: "#", label: "GitHub" },
-                { Icon: Linkedin, href: "#", label: "LinkedIn" },
-                { Icon: Mail, href: "#", label: "Email" },
+                { Icon: Github, href: "https://github.com/gelikadlcrz", label: "GitHub" },
+                { Icon: Linkedin, href: "https://www.linkedin.com/in/gelikadlcrz/", label: "LinkedIn" },
+                { Icon: Mail, href: "mailto:2241338@slu.edu.ph", label: "Email" },
               ].map(({ Icon, href, label }, index) => (
                 <motion.a
                   key={index}

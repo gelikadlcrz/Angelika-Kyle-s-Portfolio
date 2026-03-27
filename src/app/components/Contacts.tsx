@@ -60,8 +60,8 @@ const handleSubmit = (e: React.FormEvent) => {
     {
       icon: Linkedin,
       label: "LinkedIn",
-      value: "linkedin.com/in/angelika-kyle-dela-cruz-57a720384",
-      href: "https://linkedin.com/in/angelika-kyle-dela-cruz-57a720384/",
+      value: "https://www.linkedin.com/in/gelikadlcrz/",
+      href: "https://www.linkedin.com/in/gelikadlcrz/",
       description: "Let's connect professionally",
     },
     {
@@ -75,8 +75,8 @@ const handleSubmit = (e: React.FormEvent) => {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/gelikadlcrz", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/angelika-kyle-dela-cruz-57a720384/", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/gelikadlcrz/", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/gelikadlcruz/", label: "Instagram" },
   ];
 
   return (
@@ -92,8 +92,8 @@ const handleSubmit = (e: React.FormEvent) => {
             <span className="text-[#7ee787]">/</span>contacts
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl">
-            I'm interested in freelance opportunities and collaborative projects.
-            Whether you have a question or just want to say hi, feel free to reach out!
+            I’m actively looking for an internship! Don’t hesitate to reach out for collaborations, 
+            questions, or even just to say hi—I’d love to connect with fellow developers and professionals.
           </p>
         </motion.div>
 

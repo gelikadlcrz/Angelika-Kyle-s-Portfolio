@@ -235,7 +235,7 @@ export const projects: ProjectData[] = [
     image: hangman,
     tags: ["Java", "Sockets", "Multithreading", "MySQL"],
     role: "Core Java Developer",
-    repository: "https://github.com/gelikadIcrz/What-s-The-Word-Networked-Multiplayer-Word-Game",
+    repository: "https://github.com/gelikadlcrz/What-s-The-Word-Networked-Multiplayer-Word-Game",
     fullDescription:
       "What's The Word is a networked, real-time multiplayer word-guessing game built on a robust client-server architecture. Operating similarly to a competitive 'Hangman', the platform features automated matchmaking, dynamic lobbies supporting up to 5 players, and real-time state synchronization, complete with a dedicated backend for live administration.",
     contributions: [
@@ -347,7 +347,7 @@ export const projects: ProjectData[] = [
     image: communityImg,
     tags: ["Java", "JavaFX", "Aiven SQL", "GitLab"],
     role: "Project Lead & Full-Stack Developer",
-    repository: "https://gitlab.com/2241338/team-queriosity-finalproject",
+    repository: "https://github.com/gelikadlcrz/Community-A-Volunteer-Service-Tracker",
     fullDescription:
       "Community is a comprehensive web application built to streamline the organization, management, and tracking of local volunteer efforts. The platform serves as a centralized hub where users can discover volunteer groups, participate in community services, and track their personal volunteer history, while empowering community leaders with the tools needed to manage teams and coordinate service events effectively.",
     contributions: [
@@ -410,7 +410,7 @@ export const projects: ProjectData[] = [
     image: gearRentalImg,
     tags: ["Java", "JavaFX", "Java RMI", "JSON"],
     role: "Core Java Developer",
-    repository: "https://github.com/gelikadIcrz/Studio-Gear-Rental-System",
+    repository: "https://github.com/gelikadlcrz/Studio-Gear-Rental-System",
     fullDescription:
       "The Studio Gear Rental System is a comprehensive client-server application designed to manage the complex rental workflows for professional audio, video, lighting, and rigging equipment. The platform tracks real-time inventory availability, manages extensive gear specifications, and calculates standard rental rates to facilitate a seamless reservation process.",
     contributions: [

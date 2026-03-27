@@ -240,7 +240,7 @@ const handleSubmit = (e: React.FormEvent) => {
                 <div className="flex items-center gap-3">
                   {[
                     { Icon: Github, href: "https://github.com/gelikadlcrz" },
-                    { Icon: Linkedin, href: "https://linkedin.com/in/angelika-kyle-dela-cruz-57a720384/" },
+                    { Icon: Linkedin, href: "https://www.linkedin.com/in/gelikadlcrz/" },
                     { Icon: Mail, href: "mailto:2241338@slu.edu.ph" },
                   ].map(({ Icon, href }, index) => (
                     <motion.a
@@ -525,9 +525,9 @@ const handleSubmit = (e: React.FormEvent) => {
               <span className="text-[#7ee787]">#</span>contacts
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl">
-              I'm interested in freelance opportunities. However, if you have other
-              request or question, don't hesitate to contact me
-            </p>
+              I’m actively looking for an internship! Don’t hesitate to reach out for collaborations, 
+              questions, or even just to say hi—I’d love to connect with fellow developers and professionals.            
+              </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12">
@@ -543,7 +543,7 @@ const handleSubmit = (e: React.FormEvent) => {
                 {[
                   { icon: Mail, label: "Email", value: "2241338@slu.edu.ph", href: "mailto:2241338@slu.edu.ph" },
                   { icon: Github, label: "GitHub", value: "github.com/gelikadlcrz", href: "https://github.com/gelikadlcrz" },
-                  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/angelika-kyle-dela-cruz-57a720384", href: "https://linkedin.com/in/angelika-kyle-dela-cruz-57a720384/" },
+                  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/gelikadlcrz/", href: "https://www.linkedin.com/in/gelikadlcrz/" },
                 ].map((item, index) => {
                   const Icon = item.icon;
                   return (
