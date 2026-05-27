@@ -426,6 +426,10 @@ body::before {
   box-shadow: 0 18px 55px rgba(17, 17, 17, 0.1);
 }
 
+.command-fab span {
+  white-space: nowrap;
+}
+
 .command-fab:hover {
   color: var(--bg);
   background: var(--ink);
@@ -1526,11 +1530,19 @@ body::before {
   font-weight: 900;
 }
 
+.command-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
 .command-header kbd {
   padding: 6px 9px;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--softer);
+  white-space: nowrap;
 }
 
 .command-search {
@@ -2084,59 +2096,6 @@ body::before {
   font-weight: 850;
 }
 
-.experience-dock {
-  position: fixed;
-  left: 22px;
-  bottom: 22px;
-  z-index: 64;
-  max-width: 310px;
-  display: grid;
-  grid-template-columns: 36px 1fr;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  color: var(--ink);
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 18px 55px rgba(17, 17, 17, 0.1);
-  cursor: pointer;
-  text-align: left;
-  transition: 0.22s ease;
-}
-
-.experience-dock > svg {
-  color: #111;
-  background: var(--lime);
-  border-radius: 50%;
-  padding: 8px;
-  box-sizing: content-box;
-}
-
-.experience-dock strong,
-.experience-dock small {
-  display: block;
-}
-
-.experience-dock strong {
-  font-size: 0.88rem;
-  letter-spacing: -0.03em;
-}
-
-.experience-dock small {
-  margin-top: 2px;
-  color: var(--muted);
-  line-height: 1.35;
-  font-size: 0.76rem;
-  font-weight: 780;
-}
-
-.experience-dock:hover {
-  transform: translateY(-4px);
-  background: color-mix(in srgb, var(--lime) 24%, var(--soft));
-}
-
 @media (max-width: 1120px) {
   .process-studio {
     grid-template-columns: 1fr;
@@ -2152,9 +2111,6 @@ body::before {
     text-align: center;
   }
 
-  .experience-dock {
-    display: none;
-  }
 }
 
 @media (max-width: 860px) {

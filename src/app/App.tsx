@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from 'react';
 import type { CSSProperties, FormEvent, ReactNode, PointerEvent } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import {
-  Activity,
   ArrowRight,
   BadgeCheck,
   BrainCircuit,
@@ -32,7 +31,6 @@ import {
   Send,
   Sparkles,
   Sun,
-  TerminalSquare,
   UserRound,
   WandSparkles,
   Wrench,
@@ -42,7 +40,7 @@ import {
 
 import profilePic from '../assets/images/profile.jpg';
 import resumeFile from '../assets/pdfs/Angelika_Kyle_Resume.pdf';
-import { processSteps, liveModes, type LiveModeIconKey, type ProcessStepIconKey } from './data/experience';
+import { processSteps, type ProcessStepIconKey } from './data/experience';
 import { projects, skillClusters, type Project, type ProjectCategory, type ProjectTab } from './data/portfolio';
 
 type Palette = 'light' | 'dark';
@@ -89,12 +87,6 @@ const processStepIcons: Record<ProcessStepIconKey, LucideIcon> = {
   build: Code2,
   model: BrainCircuit,
   polish: WandSparkles,
-};
-
-const liveModeIcons: Record<LiveModeIconKey, LucideIcon> = {
-  explorer: Activity,
-  builder: TerminalSquare,
-  recruiter: Sparkles,
 };
 
 const skillIcons: SkillIconMap = {
@@ -297,7 +289,7 @@ function Hero() {
         </motion.div>
 
         <motion.div className="hero-command-strip" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32 }}>
-          <span><Command size={15} /> Ctrl/Cmd K for quick actions</span>
+          <span><Search size={15} /> ⌘ K / Ctrl K for quick actions</span>
           <span><MousePointerClick size={15} /> Click the floating badges</span>
           <span><Zap size={15} /> Hover cards for motion</span>
         </motion.div>
@@ -708,7 +700,11 @@ function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (value: boo
             <div className="command-header">
               <Command size={18} />
               <span>Command Palette</span>
-              <kbd>Esc</kbd>
+              <div className="command-shortcuts" aria-label="Keyboard shortcuts">
+                <kbd>⌘ K</kbd>
+                <kbd>Ctrl K</kbd>
+                <kbd>Esc</kbd>
+              </div>
             </div>
             <label className="command-search">
               <Search size={17} />
@@ -730,22 +726,6 @@ function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (value: boo
   );
 }
 
-
-function ExperienceDock() {
-  const [mode, setMode] = useState(0);
-  const current = liveModes[mode];
-  const Icon = liveModeIcons[current.iconKey];
-
-  return (
-    <button className="experience-dock" onClick={() => setMode((value) => (value + 1) % liveModes.length)} aria-label="Cycle portfolio interaction mode">
-      <Icon size={18} />
-      <span>
-        <strong>{current.label}</strong>
-        <small>{current.text}</small>
-      </span>
-    </button>
-  );
-}
 
 function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
@@ -843,9 +823,8 @@ export default function App() {
       <BackgroundPlayground />
       <div className="grain" aria-hidden="true" />
       <button className="command-fab" onClick={() => setCommandOpen(true)} aria-label="Open command palette">
-        <Command size={18} /> <span>Ctrl K</span>
+        <Search size={18} /> <span>⌘ K / Ctrl K</span>
       </button>
-      <ExperienceDock />
       <Navigation active={active} palette={palette} setPalette={setPalette} />
       <Hero />
       <FocusStrip />

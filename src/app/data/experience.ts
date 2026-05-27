@@ -1,5 +1,4 @@
 export type ProcessStepIconKey = 'map' | 'build' | 'model' | 'polish';
-export type LiveModeIconKey = 'explorer' | 'builder' | 'recruiter';
 
 export const processSteps = [
   {
@@ -30,10 +29,4 @@ export const processSteps = [
     text: 'I refine motion, visual hierarchy, microinteractions, and technical storytelling until the system feels complete.',
     artifacts: ['animation', 'responsive UI', 'docs', 'demo flow'],
   },
-];
-
-export const liveModes = [
-  { iconKey: 'explorer' as const, label: 'Explorer mode', text: 'Hover, click, filter, and open the command palette.' },
-  { iconKey: 'builder' as const, label: 'Builder mode', text: 'Project cards reveal process, tech, and outcomes.' },
-  { iconKey: 'recruiter' as const, label: 'Recruiter mode', text: 'Fast scanning with clear role, stack, and impact.' },
 ];
