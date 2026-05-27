@@ -2509,3 +2509,58 @@ body::before {
     aspect-ratio: 4 / 3;
   }
 }
+
+/* v16: anchor contact submit button to the form's bottom-right corner */
+.contact-form button[type='submit'] {
+  width: fit-content;
+  justify-self: end;
+  align-self: end;
+  min-width: 210px;
+  min-height: 56px;
+  margin-top: 6px;
+  padding: 0 24px;
+  border-radius: 999px;
+}
+
+:root[data-palette='dark'] body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(116, 144, 40, 0.28), transparent 30%),
+    radial-gradient(circle at 86% 14%, rgba(95, 109, 198, 0.22), transparent 34%),
+    radial-gradient(circle at 52% 92%, rgba(168, 72, 61, 0.18), transparent 35%),
+    linear-gradient(135deg, #11160f 0%, #11141a 46%, #17131a 100%);
+}
+
+:root[data-palette='dark'] .hero-section {
+  position: relative;
+}
+
+:root[data-palette='dark'] .hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0 -12vw;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(223, 255, 69, 0.10), transparent 34%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.06) 62%, transparent);
+}
+
+:root[data-palette='dark'] .blob-one {
+  opacity: 0.34;
+  background: rgba(143, 170, 48, 0.42);
+}
+
+:root[data-palette='dark'] .availability-chip,
+:root[data-palette='dark'] .secondary-action {
+  color: rgba(248, 244, 234, 0.82);
+  background: rgba(255, 255, 255, 0.10);
+}
+
+:root[data-palette='dark'] .hero-text {
+  color: rgba(248, 244, 234, 0.78);
+}
+
+:root[data-palette='dark'] .hero-text strong {
+  color: #fff7e8;
+  background: linear-gradient(transparent 58%, rgba(223, 255, 69, 0.72) 58%);
+}

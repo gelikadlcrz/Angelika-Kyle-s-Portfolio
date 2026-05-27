@@ -3,7 +3,7 @@ import naviNowImg from '../../assets/images/naviNow.png';
 import gearRentalImg from '../../assets/images/gearRental.png';
 import curriculumCheckerImg from '../../assets/images/curriculumChecker.png';
 import hangman from '../../assets/images/hangman.png';
-import communityImg from '../../assets/images/community.png'; // Added from your previous message
+import communityImg from '../../assets/images/community.png';
 
 export interface ProjectData {
   id: string;
