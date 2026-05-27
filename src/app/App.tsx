@@ -22,7 +22,6 @@ import {
   Layers3,
   Linkedin,
   Mail,
-  Menu,
   Moon,
   MousePointerClick,
   Palette,
@@ -34,7 +33,6 @@ import {
   UserRound,
   WandSparkles,
   Wrench,
-  X,
 } from 'lucide-react';
 
 import profilePic from '../assets/images/profile.jpg';
@@ -60,6 +58,8 @@ function getRoleArticle(role: string) {
   return /^[aeiou]/i.test(role) ? 'an' : 'a';
 }
 const categories = ['All', 'AI', 'Full Stack', 'Mobile', 'Systems', 'Research', 'NLP'] as const;
+
+
 const projectTabs: ProjectTab[] = ['Overview', 'Build', 'Tech', 'Outcome'];
 
 const focusCards = [
@@ -82,6 +82,24 @@ const focusCards = [
     icon: Palette,
     title: 'Interfaces with taste',
     text: 'Clean layouts, microinteractions, and recruiter-friendly storytelling.',
+  },
+];
+
+const heroFocusCards = [
+  {
+    icon: Rocket,
+    title: 'End-to-end systems',
+    text: 'I connect UI, backend logic, databases, and AI into one usable product flow.',
+  },
+  {
+    icon: BrainCircuit,
+    title: 'Applied AI workflows',
+    text: 'I move models out of notebooks and into real app experiences.',
+  },
+  {
+    icon: Database,
+    title: 'Reliable product logic',
+    text: 'I design data structures, access rules, and workflows that keep features stable.',
   },
 ];
 
@@ -187,77 +205,53 @@ function TiltCard({ children, className = '' }: { children: ReactNode; className
   );
 }
 
-function Navigation({ active, palette, setPalette }: { active: string; palette: Palette; setPalette: (theme: Palette) => void }) {
-  const [open, setOpen] = useState(false);
-
+function Navigation({
+  active,
+  palette,
+  setPalette,
+}: {
+  active: string;
+  palette: Palette;
+  setPalette: (theme: Palette) => void;
+}) {
   return (
-    <>
-      <nav className="top-nav" aria-label="Primary navigation">
-        <a href="#home" className="brand-lockup" aria-label="Angelika Kyle home">
-          <span className="brand-sigil">AK</span>
-          <span>Angelika Kyle</span>
-        </a>
+    <nav className="top-nav" aria-label="Main navigation">
+      <a href="#home" className="brand-lockup" aria-label="Angelika Kyle home">
+        <span className="brand-sigil">AK</span>
+        <span>Angelika Kyle</span>
+      </a>
 
-        <div className="nav-center">
-          {navItems.map((item) => (
-            <a key={item.href} href={item.href} className={active === item.href.slice(1) ? 'active' : ''}>
-              <item.icon size={16} />
-              <span>{item.label}</span>
-            </a>
-          ))}
-        </div>
-
-        <div className="nav-actions">
-          <button className="icon-button" onClick={() => setPalette(palette === 'light' ? 'dark' : 'light')} aria-label="Toggle color mode">
-            {palette === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
-          <button className="menu-button" onClick={() => setOpen(true)} aria-label="Open menu">
-            <Menu size={20} />
-          </button>
-          <a className="nav-cta" href={resumeFile} target="_blank" rel="noreferrer">
-            <FileText size={16} /> Resume <ArrowRight size={16} />
-          </a>
-        </div>
-      </nav>
-
-      <aside className="rail-nav" aria-label="Section shortcuts">
+      <div className="nav-center" aria-label="Section navigation">
         {navItems.map((item) => (
-          <a key={item.href} href={item.href} className={active === item.href.slice(1) ? 'active' : ''} aria-label={item.label}>
-            <item.icon size={18} />
-            <b>{item.label}</b>
+          <a key={item.href} href={item.href} className={active === item.href.slice(1) ? 'active' : ''}>
+            <item.icon size={16} />
+            <span>{item.label}</span>
           </a>
         ))}
-      </aside>
+      </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div className="mobile-menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <motion.div className="mobile-menu-card" initial={{ y: 22, scale: 0.96 }} animate={{ y: 0, scale: 1 }} exit={{ y: 22, scale: 0.96 }}>
-              <button className="icon-button close" onClick={() => setOpen(false)} aria-label="Close menu">
-                <X size={20} />
-              </button>
-              {navItems.map((item) => (
-                <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
-                  <item.icon size={20} /> {item.label}
-                </a>
-              ))}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+      <div className="nav-actions">
+        <button className="icon-button" onClick={() => setPalette(palette === 'light' ? 'dark' : 'light')} aria-label="Toggle color mode">
+          {palette === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+        </button>
+        <a className="nav-cta" href={resumeFile} target="_blank" rel="noreferrer">
+          <FileText size={16} /> Resume <ArrowRight size={16} />
+        </a>
+      </div>
+    </nav>
   );
 }
 
 function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [activeFocus, setActiveFocus] = useState(0);
-  const ActiveIcon = focusCards[activeFocus].icon;
+  const ActiveIcon = heroFocusCards[activeFocus].icon;
 
   useEffect(() => {
     const timer = window.setInterval(() => setRoleIndex((index) => (index + 1) % roles.length), 1700);
     return () => window.clearInterval(timer);
   }, []);
+
 
   return (
     <header id="home" className="hero-section section-shell">
@@ -310,8 +304,8 @@ function Hero() {
             <ActiveIcon size={30} />
             <div>
               <p>currently_building</p>
-              <strong>{focusCards[activeFocus].title}</strong>
-              <span>{focusCards[activeFocus].text}</span>
+              <strong>{heroFocusCards[activeFocus].title}</strong>
+              <span>{heroFocusCards[activeFocus].text}</span>
             </div>
           </div>
         </div>
@@ -521,6 +515,7 @@ function Work() {
       return matchesCategory && matchesQuery;
     });
   }, [activeCategory, query]);
+
 
   useEffect(() => {
     if (!filteredProjects.some((project) => project.id === selected.id)) {
