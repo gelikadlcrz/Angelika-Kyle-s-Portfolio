@@ -367,21 +367,18 @@ function About() {
               label: 'Education',
               title: 'B.S. Computer Science',
               detail: 'Saint Louis University · 2024—2027',
-              chips: ['Dean’s Lister', 'Incoming 4th Year'],
               icon: GraduationCap,
             },
             {
               label: 'Direction',
               title: 'Full-stack, software, and AI engineering',
               detail: 'I connect interfaces, backend logic, databases, and models into one usable flow.',
-              chips: ['Product Systems', 'AI Integration'],
               icon: Rocket,
             },
             {
               label: 'Style',
               title: 'Clean systems with measurable polish',
               detail: 'Database-led structure, clear UX, thoughtful motion, and results that are easy to explain.',
-              chips: ['Workflow-first', 'Recruiter-ready'],
               icon: Sparkles,
             },
           ].map((item, index) => {
@@ -396,9 +393,6 @@ function About() {
                 <span>{item.label}</span>
                 <strong>{item.title}</strong>
                 <p>{item.detail}</p>
-                <div className="identity-chips">
-                  {item.chips.map((chip) => <small key={chip}>{chip}</small>)}
-                </div>
               </motion.article>
             );
           })}
@@ -669,13 +663,14 @@ function Stack() {
           </div>
           {orbitItems.map((item, index) => {
             const angle = (360 / orbitItems.length) * index - 90;
+            const ring = orbitItems.length > 7 && index % 2 === 1 ? 'calc(var(--orbit-radius) - 58px)' : 'var(--orbit-radius)';
             return (
               <motion.span
                 key={item}
                 className="orbit-tech"
-                style={{ '--angle': `${angle}deg`, '--delay': `${index * -0.18}s` } as CSSProperties}
-                initial={{ opacity: 0, scale: 0.88 }}
-                animate={{ opacity: 1, scale: 1 }}
+                style={{ '--angle': `${angle}deg`, '--ring': ring, '--delay': `${index * -0.18}s` } as CSSProperties}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: index * 0.025 }}
               >
                 {item}
