@@ -56,6 +56,10 @@ const navItems: NavItem[] = [
 ];
 
 const roles = ['Full-Stack Developer', 'Software Engineer', 'AI Engineer', 'Systems Builder', 'Interface Tinkerer'];
+
+function getRoleArticle(role: string) {
+  return /^[aeiou]/i.test(role) ? 'an' : 'a';
+}
 const categories = ['All', 'AI', 'Full Stack', 'Mobile', 'Systems', 'Research', 'NLP'] as const;
 const projectTabs: ProjectTab[] = ['Overview', 'Build', 'Tech', 'Outcome'];
 
@@ -269,7 +273,7 @@ function Hero() {
         </motion.h1>
 
         <motion.p className="hero-text" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }}>
-          I build sharp, intelligent, and workflow-centered software as a{' '}
+          I build sharp, intelligent, and workflow-centered software as {getRoleArticle(roles[roleIndex])}{' '}
           <AnimatePresence mode="wait">
             <motion.strong key={roles[roleIndex]} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
               {roles[roleIndex]}
