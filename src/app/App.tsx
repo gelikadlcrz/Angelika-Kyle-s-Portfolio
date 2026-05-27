@@ -611,9 +611,13 @@ function Work() {
                   ))}
                 </div>
 
-                <a className="project-link" href={selected.link} target="_blank" rel="noreferrer">
-                  View source <ExternalLink size={16} />
-                </a>
+                <div className="project-links">
+                  {(selected.links ?? [{ label: 'View source', href: selected.link }]).map((link) => (
+                    <a className="project-link" href={link.href} target="_blank" rel="noreferrer" key={link.href}>
+                      {link.label} <ExternalLink size={16} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </motion.article>
           </AnimatePresence>
@@ -694,6 +698,17 @@ function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (value: boo
 
   const filteredCommands = commands.filter((item) => item.label.toLowerCase().includes(query.toLowerCase()));
 
+  const runCommand = (item: (typeof commands)[number]) => {
+    setOpen(false);
+
+    if (item.external) {
+      window.open(item.href, '_blank', 'noreferrer');
+      return;
+    }
+
+    window.location.href = item.href;
+  };
+
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
@@ -726,11 +741,31 @@ function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (value: boo
             </div>
             <label className="command-search">
               <Search size={17} />
-              <input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search quick actions..." />
+              <input
+                autoFocus
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' && filteredCommands[0]) {
+                    event.preventDefault();
+                    runCommand(filteredCommands[0]);
+                  }
+                }}
+                placeholder="Search quick actions..."
+              />
             </label>
             <div className="command-list">
               {filteredCommands.length ? filteredCommands.map((item) => (
-                <a key={item.label} href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} onClick={() => setOpen(false)}>
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noreferrer' : undefined}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    runCommand(item);
+                  }}
+                >
                   <item.icon size={20} />
                   <span>{item.label}</span>
                   <ArrowRight size={16} />

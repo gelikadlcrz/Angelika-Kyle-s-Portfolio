@@ -40,9 +40,14 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   min-height: 100vh;
   color: var(--ink);
@@ -51,7 +56,21 @@ body {
     radial-gradient(circle at 86% 14%, color-mix(in srgb, var(--blue) 32%, transparent), transparent 34%),
     radial-gradient(circle at 52% 92%, color-mix(in srgb, var(--coral) 22%, transparent), transparent 35%),
     linear-gradient(135deg, var(--bg), var(--bg-2));
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@supports not (overflow-x: clip) {
+  html,
+  body,
+  #root {
+    overflow-x: hidden;
+  }
 }
 
 a {
@@ -808,10 +827,11 @@ body::before {
 
 .kinetic-marquee {
   position: relative;
-  left: 50%;
-  width: 100vw;
+  left: auto;
+  width: 100%;
+  max-width: 100%;
   margin: -18px 0 86px;
-  transform: translateX(-50%);
+  transform: none;
   overflow: hidden;
   border-block: 1px solid var(--line);
   border-radius: 0;
@@ -2563,4 +2583,285 @@ body::before {
 :root[data-palette='dark'] .hero-text strong {
   color: #fff7e8;
   background: linear-gradient(transparent 58%, rgba(223, 255, 69, 0.72) 58%);
+}
+
+/* v17: contact spacing, cleaner project selection, and dark command palette polish */
+.contact-form {
+  align-content: start;
+  row-gap: 16px;
+}
+
+.contact-form label {
+  min-height: 0;
+  gap: 9px !important;
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-top: 0 !important;
+}
+
+.contact-form input {
+  min-height: 64px;
+}
+
+.contact-form textarea {
+  min-height: 150px;
+}
+
+.project-row {
+  isolation: isolate;
+}
+
+.project-row::before {
+  display: none;
+}
+
+.project-row:hover,
+.project-row.active {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 54%, var(--line));
+  background:
+    radial-gradient(circle at 10% 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 42%),
+    color-mix(in srgb, var(--accent) 8%, var(--soft));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent),
+    0 16px 38px rgba(17, 17, 17, 0.08);
+}
+
+.project-row.active span {
+  color: var(--ink);
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.project-links .project-link {
+  margin-top: 0;
+}
+
+.command-overlay {
+  background: rgba(9, 9, 10, 0.62);
+  backdrop-filter: blur(24px) saturate(118%);
+}
+
+.command-card {
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  box-shadow: 0 34px 110px rgba(0, 0, 0, 0.32);
+}
+
+.command-search input {
+  color: var(--ink);
+}
+
+.command-card a:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ink) 34%, transparent);
+  outline-offset: 3px;
+}
+
+.command-search:focus-within {
+  border-color: color-mix(in srgb, var(--ink) 22%, var(--line));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.command-search input:focus,
+.command-search input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:root[data-palette='dark'] .command-overlay {
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(26px) saturate(120%);
+}
+
+:root[data-palette='dark'] .command-card {
+  color: #fff8ec;
+  background:
+    linear-gradient(145deg, rgba(24, 27, 25, 0.96), rgba(10, 11, 12, 0.96)),
+    var(--bg);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 38px 140px rgba(0, 0, 0, 0.66);
+}
+
+:root[data-palette='dark'] .command-header,
+:root[data-palette='dark'] .command-card a,
+:root[data-palette='dark'] .command-search input,
+:root[data-palette='dark'] .command-empty {
+  color: rgba(255, 248, 236, 0.82);
+}
+
+:root[data-palette='dark'] .command-search,
+:root[data-palette='dark'] .command-card a,
+:root[data-palette='dark'] .command-header kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+:root[data-palette='dark'] .command-card a:hover {
+  color: #111;
+  background: var(--lime);
+}
+
+/* Final cleanup: prevent horizontal scrollbars without breaking animated marquee movement. */
+html,
+body,
+#root,
+.portfolio-app {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@supports not (overflow-x: clip) {
+  html,
+  body,
+  #root,
+  .portfolio-app {
+    overflow-x: hidden;
+  }
+}
+
+.background-playground,
+.grain,
+.cursor-aura,
+.cursor-dot,
+.command-overlay,
+.mobile-menu {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.kinetic-marquee,
+.marquee-lanes,
+.marquee-lane {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  max-width: none;
+  overflow: visible;
+  will-change: transform;
+}
+/* Fix command palette internal horizontal scrollbar */
+.command-palette,
+.command-panel,
+.command-modal,
+.command-list,
+.command-results,
+.command-actions {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+/* Make command rows fit inside the panel */
+.command-item,
+.command-option,
+.command-action,
+.command-row,
+.command-result,
+.command-palette button,
+.command-panel button {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Prevent hover movement from creating horizontal overflow */
+.command-item:hover,
+.command-option:hover,
+.command-action:hover,
+.command-row:hover,
+.command-result:hover,
+.command-palette button:hover,
+.command-panel button:hover {
+  transform: none !important;
+}
+
+/* Keep text from forcing the row wider */
+.command-item *,
+.command-option *,
+.command-action *,
+.command-row *,
+.command-result *,
+.command-palette button *,
+.command-panel button * {
+  min-width: 0 !important;
+}
+
+/* Specifically hide horizontal scrollbars inside the command palette */
+.command-palette::-webkit-scrollbar:horizontal,
+.command-panel::-webkit-scrollbar:horizontal,
+.command-list::-webkit-scrollbar:horizontal,
+.command-results::-webkit-scrollbar:horizontal {
+  display: none;
+}
+
+/* Command palette: prevent hover rows from clipping on the right */
+.command-palette,
+.command-panel,
+.command-modal,
+.command-list,
+.command-results,
+.command-actions {
+  overflow-x: hidden !important;
+}
+
+/* Give command rows breathing room inside the panel */
+.command-palette button,
+.command-panel button,
+.command-list button,
+.command-results button,
+.command-actions button,
+.command-item,
+.command-option,
+.command-action,
+.command-row,
+.command-result {
+  width: calc(100% - 16px) !important;
+  max-width: calc(100% - 16px) !important;
+  margin-inline: 8px !important;
+  box-sizing: border-box !important;
+  transform: none !important;
+}
+
+/* Keep hover/focus inside the same width instead of expanding/cutting */
+.command-palette button:hover,
+.command-panel button:hover,
+.command-list button:hover,
+.command-results button:hover,
+.command-actions button:hover,
+.command-item:hover,
+.command-option:hover,
+.command-action:hover,
+.command-row:hover,
+.command-result:hover {
+  transform: none !important;
+  width: calc(100% - 16px) !important;
+  max-width: calc(100% - 16px) !important;
+}
+
+/* Make the active/hover state look intentional without overflowing */
+.command-palette button:hover,
+.command-panel button:hover,
+.command-list button:hover,
+.command-results button:hover,
+.command-actions button:hover {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Keep arrow icons from touching the edge */
+.command-palette button svg:last-child,
+.command-panel button svg:last-child,
+.command-list button svg:last-child,
+.command-results button svg:last-child,
+.command-actions button svg:last-child {
+  flex-shrink: 0 !important;
+  margin-right: 2px !important;
 }

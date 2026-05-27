@@ -23,6 +23,7 @@ export interface Project {
   imageMode?: 'contain' | 'cover';
   accent: string;
   link: string;
+  links?: { label: string; href: string }[];
   highlights: string[];
   overview: string;
   build: string[];
@@ -43,6 +44,10 @@ export const projects: Project[] = [
     stack: ['React Native', 'Python', 'PyTorch', 'MediaPipe', 'TensorFlow Lite', 'PostgreSQL'],
     accent: '#dfff45',
     link: 'https://github.com/gelikadlcrz/CoreSet-AI-Fitness-Tracker-Mobile-App',
+    links: [
+      { label: 'Mobile app source', href: 'https://github.com/gelikadlcrz/CoreSet-AI-Fitness-Tracker-Mobile-App' },
+      { label: 'ML pipeline source', href: 'https://github.com/gelikadlcrz/CoreSet-AI-Fitness-Tracker-ML-Pipeline' },
+    ],
     highlights: ['Realtime camera AI', 'Pose landmarks', 'Mobile-ready inference'],
     overview:
       'An AI-powered mobile fitness tracker for exercise recognition, rep counting, skeletal overlays, and workout analytics using camera-based pose landmarks.',
@@ -66,6 +71,10 @@ export const projects: Project[] = [
     stack: ['Python', 'PyTorch', 'Optuna', 'Scikit-Learn', 'Tableau'],
     accent: '#93a4ff',
     link: 'https://github.com/gelikadlcrz',
+    links: [
+      { label: 'Source code', href: 'https://github.com/gelikadlcrz' },
+      { label: 'Tableau dashboard', href: 'https://public.tableau.com/app/profile/iris.joe.perez/viz/shared/4CKWWKPMT' },
+    ],
     highlights: ['Temporal forecasting', 'Interpretability', 'Risk dashboarding'],
     overview:
       'An interpretable AI forecasting system that models provincial political dynasty saturation and institutional capture risk across the Philippines.',
