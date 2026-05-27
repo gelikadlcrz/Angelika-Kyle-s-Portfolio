@@ -35,7 +35,6 @@ import {
   WandSparkles,
   Wrench,
   X,
-  Zap,
 } from 'lucide-react';
 
 import profilePic from '../assets/images/profile.jpg';
@@ -291,11 +290,6 @@ function Hero() {
           </a>
         </motion.div>
 
-        <motion.div className="hero-command-strip" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32 }}>
-          <span><Search size={15} /> ⌘ K / Ctrl K for quick actions</span>
-          <span><MousePointerClick size={15} /> Click the floating badges</span>
-          <span><Zap size={15} /> Hover cards for motion</span>
-        </motion.div>
       </div>
 
       <TiltCard className="hero-visual">
