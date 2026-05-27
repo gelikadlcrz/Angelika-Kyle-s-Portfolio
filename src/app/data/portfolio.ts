@@ -260,17 +260,17 @@ export const skillClusters = [
   },
   {
     label: 'Backend',
-    items: ['Node.js', 'Express', 'PHP', 'Java', 'Sockets', 'RMI', 'REST APIs'],
-    note: 'Server logic, role-based access, client-server systems, and APIs.',
+    items: ['Node.js', 'Express', 'PHP', 'Java', 'REST APIs', 'Auth/RBAC', 'Sockets', 'RMI', 'JSON'],
+    note: 'Server logic, secure roles, client-server systems, and API workflows.',
   },
   {
     label: 'AI / Data',
-    items: ['Python', 'PyTorch', 'TensorFlow', 'Scikit-Learn', 'Optuna', 'Tableau'],
+    items: ['Python', 'PyTorch', 'TensorFlow', 'TFLite', 'MediaPipe', 'Scikit-Learn', 'Optuna', 'Tableau', 'Chart.js'],
     note: 'Modeling pipelines, interpretable analytics, and app-level inference.',
   },
   {
     label: 'Database',
-    items: ['MySQL', 'PostgreSQL', 'Aiven', 'ERDs', 'SQL', 'Schema Design'],
-    note: 'Relational structures that keep complex workflows stable.',
+    items: ['MySQL', 'PostgreSQL', 'Aiven SQL', 'WatermelonDB', 'SQLite', 'ERDs', 'SQL', 'Schema Design'],
+    note: 'Relational and local-first structures that keep complex workflows stable.',
   },
 ];

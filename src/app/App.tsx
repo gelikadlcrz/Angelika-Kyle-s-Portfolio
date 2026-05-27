@@ -263,10 +263,9 @@ function Hero() {
           <span /> Incoming 4th Year CS Student · Saint Louis University Baguio
         </motion.div>
 
-        <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
+        <motion.h1 className="hero-name" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
           <span>Angelika</span>
           <span className="outlined">Kyle</span>
-          <span>Dela Cruz</span>
         </motion.h1>
 
         <motion.p className="hero-text" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }}>
@@ -364,15 +363,45 @@ function About() {
 
         <motion.div className="identity-stack" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           {[
-            ['Education', 'B.S. Computer Science · Saint Louis University'],
-            ['Direction', 'Full-stack development, software engineering, and AI engineering'],
-            ['Style', 'Clean systems, strong databases, useful interfaces, measurable results'],
-          ].map(([label, text]) => (
-            <article key={label}>
-              <span>{label}</span>
-              <strong>{text}</strong>
-            </article>
-          ))}
+            {
+              label: 'Education',
+              title: 'B.S. Computer Science',
+              detail: 'Saint Louis University · 2024—2027',
+              chips: ['Dean’s Lister', 'Incoming 4th Year'],
+              icon: GraduationCap,
+            },
+            {
+              label: 'Direction',
+              title: 'Full-stack, software, and AI engineering',
+              detail: 'I connect interfaces, backend logic, databases, and models into one usable flow.',
+              chips: ['Product Systems', 'AI Integration'],
+              icon: Rocket,
+            },
+            {
+              label: 'Style',
+              title: 'Clean systems with measurable polish',
+              detail: 'Database-led structure, clear UX, thoughtful motion, and results that are easy to explain.',
+              chips: ['Workflow-first', 'Recruiter-ready'],
+              icon: Sparkles,
+            },
+          ].map((item, index) => {
+            const CardIcon = item.icon;
+            return (
+              <motion.article
+                key={item.label}
+                whileHover={{ x: 10, rotate: index % 2 === 0 ? -0.6 : 0.6 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+              >
+                <div className="identity-icon"><CardIcon size={22} /></div>
+                <span>{item.label}</span>
+                <strong>{item.title}</strong>
+                <p>{item.detail}</p>
+                <div className="identity-chips">
+                  {item.chips.map((chip) => <small key={chip}>{chip}</small>)}
+                </div>
+              </motion.article>
+            );
+          })}
         </motion.div>
       </div>
     </section>
@@ -622,6 +651,8 @@ function Work() {
 function Stack() {
   const [active, setActive] = useState(skillClusters[0]);
   const ActiveIcon = skillIcons[active.label] ?? Code2;
+  const orbitItems = active.items;
+  const orbitAccent = active.label === 'AI / Data' ? '#dfff45' : active.label === 'Database' ? '#79c0ff' : '#93a4ff';
 
   return (
     <section id="stack" className="section-shell stack-section">
@@ -631,16 +662,26 @@ function Stack() {
       </motion.div>
 
       <div className="stack-grid">
-        <div className="skill-orbit" style={{ '--accent': active.label === 'AI / Data' ? '#dfff45' : '#93a4ff' } as CSSProperties}>
+        <div className="skill-orbit" style={{ '--accent': orbitAccent, '--count': orbitItems.length } as CSSProperties}>
           <div className="orbit-core">
             <ActiveIcon size={42} />
             <strong>{active.label}</strong>
           </div>
-          {active.items.slice(0, 7).map((item, index) => (
-            <span key={item} className={`orbit-tech orbit-${index + 1}`}>
-              {item}
-            </span>
-          ))}
+          {orbitItems.map((item, index) => {
+            const angle = (360 / orbitItems.length) * index - 90;
+            return (
+              <motion.span
+                key={item}
+                className="orbit-tech"
+                style={{ '--angle': `${angle}deg`, '--delay': `${index * -0.18}s` } as CSSProperties}
+                initial={{ opacity: 0, scale: 0.88 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.025 }}
+              >
+                {item}
+              </motion.span>
+            );
+          })}
         </div>
 
         <div className="skill-panels">
@@ -652,6 +693,7 @@ function Stack() {
                 <span>
                   <strong>{cluster.label}</strong>
                   <small>{cluster.note}</small>
+                  <em>{cluster.items.slice(0, 5).join(' · ')}{cluster.items.length > 5 ? ' · +' + (cluster.items.length - 5) : ''}</em>
                 </span>
               </button>
             );
