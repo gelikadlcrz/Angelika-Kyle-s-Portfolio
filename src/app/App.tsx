@@ -24,7 +24,6 @@ import {
   Mail,
   Moon,
   MousePointerClick,
-  Palette,
   Rocket,
   Search,
   Send,
@@ -62,27 +61,9 @@ const categories = ['All', 'AI', 'Full Stack', 'Mobile', 'Systems', 'Research', 
 
 const projectTabs: ProjectTab[] = ['Overview', 'Build', 'Tech', 'Outcome'];
 
-const focusCards = [
-  {
-    icon: Rocket,
-    title: 'Product-minded builds',
-    text: 'I turn project ideas into working flows, not just screens.',
-  },
-  {
-    icon: BrainCircuit,
-    title: 'AI that reaches users',
-    text: 'Models, pipelines, and inference connected to real app experiences.',
-  },
-  {
-    icon: Database,
-    title: 'Database-first logic',
-    text: 'ERDs, SQL schemas, CRUD workflows, and role-aware systems.',
-  },
-  {
-    icon: Palette,
-    title: 'Interfaces with taste',
-    text: 'Clean layouts, microinteractions, and recruiter-friendly storytelling.',
-  },
+const marqueeLoops = [
+  ['AI Engineering', 'Full-Stack Systems', 'Mobile Apps', 'Database Design', 'Software Architecture', 'Product Thinking'],
+  ['Frontend Craft', 'Backend Logic', 'Local-First Data', 'Model Integration', 'Visual Analytics', 'Workflow Design'],
 ];
 
 const heroFocusCards = [
@@ -314,25 +295,32 @@ function Hero() {
   );
 }
 
-function FocusStrip() {
+function KineticMarquee() {
+  const repeatedLoops = marqueeLoops.map((items) => [...items, ...items]);
+
   return (
-    <section className="focus-strip" aria-label="Portfolio focus areas">
-      {focusCards.map((card, index) => (
-        <motion.article
-          key={card.title}
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ delay: index * 0.04 }}
-        >
-          <card.icon size={24} />
-          <strong>{card.title}</strong>
-          <span>{card.text}</span>
-        </motion.article>
-      ))}
+    <section className="kinetic-marquee" aria-label="Moving creative engineering banner">
+      <div className="kinetic-marquee-glow glow-left" aria-hidden="true" />
+      <div className="kinetic-marquee-glow glow-right" aria-hidden="true" />
+
+      <div className="marquee-lanes">
+        {repeatedLoops.map((items, rowIndex) => (
+          <div className={`marquee-lane lane-${rowIndex + 1}`} key={rowIndex}>
+            <div className="marquee-track">
+              {items.map((item, itemIndex) => (
+                <span key={`${item}-${itemIndex}`}>
+                  {item}
+                  <i aria-hidden="true" />
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
+
 
 function About() {
   return (
@@ -857,7 +845,7 @@ export default function App() {
       </button>
       <Navigation active={active} palette={palette} setPalette={setPalette} />
       <Hero />
-      <FocusStrip />
+      <KineticMarquee />
       <About />
       <ProcessStudio />
       <Work />
