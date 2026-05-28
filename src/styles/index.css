@@ -40,14 +40,9 @@
 
 html {
   scroll-behavior: smooth;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: clip;
 }
 
 body {
-  width: 100%;
-  max-width: 100%;
   margin: 0;
   min-height: 100vh;
   color: var(--ink);
@@ -56,21 +51,7 @@ body {
     radial-gradient(circle at 86% 14%, color-mix(in srgb, var(--blue) 32%, transparent), transparent 34%),
     radial-gradient(circle at 52% 92%, color-mix(in srgb, var(--coral) 22%, transparent), transparent 35%),
     linear-gradient(135deg, var(--bg), var(--bg-2));
-  overflow-x: clip;
-}
-
-#root {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: clip;
-}
-
-@supports not (overflow-x: clip) {
-  html,
-  body,
-  #root {
-    overflow-x: hidden;
-  }
+  overflow-x: hidden;
 }
 
 a {
@@ -827,11 +808,10 @@ body::before {
 
 .kinetic-marquee {
   position: relative;
-  left: auto;
-  width: 100%;
-  max-width: 100%;
+  left: 50%;
+  width: 100vw;
   margin: -18px 0 86px;
-  transform: none;
+  transform: translateX(-50%);
   overflow: hidden;
   border-block: 1px solid var(--line);
   border-radius: 0;
@@ -2658,20 +2638,10 @@ body::before {
   color: var(--ink);
 }
 
-.command-card a:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--ink) 34%, transparent);
-  outline-offset: 3px;
-}
-
-.command-search:focus-within {
-  border-color: color-mix(in srgb, var(--ink) 22%, var(--line));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 10%, transparent);
-}
-
-.command-search input:focus,
+.command-card a:focus-visible,
 .command-search input:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
+  outline: 3px solid color-mix(in srgb, var(--lime) 62%, transparent);
+  outline-offset: 3px;
 }
 
 :root[data-palette='dark'] .command-overlay {
@@ -2707,13 +2677,409 @@ body::before {
   background: var(--lime);
 }
 
-/* Final cleanup: prevent horizontal scrollbars without breaking animated marquee movement. */
-html,
-body,
-#root,
-.portfolio-app {
-  max-width: 100%;
-  overflow-x: clip;
+/* v18: mobile layout repair */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-aura,
+  .cursor-dot {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  html,
+  body,
+  #root,
+  .portfolio-app {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .section-shell,
+  .kinetic-marquee,
+  .site-footer {
+    width: min(100% - 28px, 1200px);
+  }
+
+  .top-nav {
+    top: max(10px, env(safe-area-inset-top));
+    width: min(calc(100% - 22px), 640px);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'brand actions'
+      'sections sections';
+    gap: 8px;
+    padding: 8px;
+    border-radius: 28px;
+  }
+
+  .brand-lockup {
+    grid-area: brand;
+    min-width: 0;
+  }
+
+  .brand-lockup span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-actions {
+    grid-area: actions;
+    justify-content: flex-end;
+  }
+
+  .nav-center {
+    grid-area: sections;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: 100%;
+    gap: 5px;
+    padding-top: 2px;
+  }
+
+  .nav-center a {
+    justify-content: center;
+    min-width: 0;
+    min-height: 38px;
+    padding: 0 8px;
+    gap: 5px;
+    font-size: 0.78rem;
+  }
+
+  .nav-center a svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+  }
+
+  .hero-section {
+    grid-template-columns: 1fr !important;
+    gap: 28px;
+    min-height: auto;
+    padding-top: 166px;
+    padding-bottom: 58px;
+  }
+
+  .hero-copy,
+  .hero-copy h1,
+  .hero-name,
+  .hero-text {
+    max-width: 100% !important;
+  }
+
+  .hero-copy h1,
+  .hero-name {
+    font-size: clamp(4rem, 18vw, 7rem) !important;
+    line-height: 0.86;
+    letter-spacing: -0.082em;
+  }
+
+  .hero-text {
+    margin-top: 24px;
+    font-size: clamp(1rem, 4.4vw, 1.16rem);
+    line-height: 1.62;
+    overflow-wrap: normal;
+  }
+
+  .availability-chip {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .primary-action,
+  .secondary-action {
+    width: 100%;
+    min-width: 0;
+    padding: 0 14px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .hero-visual {
+    width: 100%;
+    min-height: 590px;
+    border-radius: 36px;
+  }
+
+  .portrait-frame {
+    top: 72px;
+    width: min(310px, 74%);
+  }
+
+  .hero-orbit {
+    opacity: 0.76;
+  }
+
+  .orbit-a {
+    width: min(430px, 104%);
+  }
+
+  .orbit-b {
+    width: min(510px, 120%);
+  }
+
+  .floating-badge {
+    max-width: calc(100% - 32px);
+    font-size: 0.86rem;
+  }
+
+  .badge-one { top: 58px; left: 18px; }
+  .badge-two { top: 244px; right: 18px; }
+  .badge-three { left: 18px; bottom: 240px; top: auto; }
+
+  .focus-console {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+    padding: 18px;
+    border-radius: 28px;
+  }
+
+  .focus-console-main {
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .focus-console-main h3 {
+    font-size: clamp(1.55rem, 7vw, 2.2rem);
+    line-height: 1;
+  }
+
+  .focus-console-main p {
+    font-size: clamp(0.98rem, 4vw, 1.08rem);
+    line-height: 1.45;
+  }
+
+  .marquee-lane span {
+    font-size: clamp(1.5rem, 8vw, 3rem);
+  }
+
+  .work-controls,
+  .project-stage,
+  .project-feature,
+  .stack-grid,
+  .contact-card,
+  .about-grid,
+  .section-heading {
+    grid-template-columns: 1fr !important;
+  }
+
+  .project-preview-wrap {
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-preview {
+    min-height: 0 !important;
+    height: 100%;
+  }
+
+  .project-info h3 {
+    font-size: clamp(2.25rem, 12vw, 4rem);
+  }
+
+  .contact-card {
+    padding: 28px;
+  }
+
+  .contact-form button[type='submit'] {
+    justify-self: stretch;
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .top-nav {
+    width: calc(100% - 18px);
+    border-radius: 26px;
+  }
+
+  .brand-sigil,
+  .icon-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .brand-lockup {
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+
+  .nav-cta {
+    min-height: 38px;
+    padding: 0 11px;
+    font-size: 0.9rem;
+  }
+
+  .nav-cta svg:last-child {
+    display: none;
+  }
+
+  .nav-center a {
+    min-height: 36px;
+    padding: 0;
+  }
+
+  .nav-center a span {
+    display: none;
+  }
+
+  .hero-section {
+    padding-top: 146px;
+    gap: 24px;
+  }
+
+  .hero-copy h1,
+  .hero-name {
+    font-size: clamp(4.4rem, 20vw, 5.7rem) !important;
+    letter-spacing: -0.078em;
+  }
+
+  .hero-text {
+    font-size: 1.02rem;
+  }
+
+  .hero-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .availability-chip {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  .hero-visual {
+    min-height: 560px;
+  }
+
+  .portrait-frame {
+    width: min(292px, 78%);
+  }
+
+  .badge-one { top: 56px; left: 14px; }
+  .badge-two { top: 230px; right: 14px; }
+  .badge-three { left: 14px; bottom: 226px; }
+
+  .section-heading h2,
+  .contact-copy h2 {
+    font-size: clamp(2.55rem, 14vw, 4.2rem);
+  }
+
+  .command-fab {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    min-height: 42px;
+    padding: 0 12px;
+  }
+
+  .command-fab span {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .section-shell,
+  .kinetic-marquee,
+  .site-footer {
+    width: min(100% - 22px, 1200px);
+  }
+
+  .top-nav {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'brand actions'
+      'sections sections';
+  }
+
+  .brand-lockup span:last-child {
+    display: none;
+  }
+
+  .nav-actions {
+    gap: 5px;
+  }
+
+  .nav-cta {
+    padding: 0 12px;
+  }
+
+  .hero-copy h1,
+  .hero-name {
+    font-size: clamp(4.05rem, 19vw, 5.2rem) !important;
+  }
+
+  .hero-visual {
+    min-height: 535px;
+  }
+
+  .focus-console-main {
+    display: block;
+  }
+
+  .focus-console-main svg {
+    margin-bottom: 10px;
+  }
+
+  .contact-card {
+    padding: 22px;
+    border-radius: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .command-overlay {
+    place-items: start center;
+    padding: max(14px, env(safe-area-inset-top)) 14px 14px;
+    overflow-y: auto;
+  }
+
+  .command-card {
+    width: min(100%, 640px);
+    max-height: calc(100dvh - 28px);
+    padding: 18px;
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  .command-header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .command-shortcuts {
+    margin-left: 0;
+  }
+
+  .command-search {
+    min-height: 52px;
+  }
+
+  .command-list {
+    overflow-x: hidden;
+    padding-right: 0;
+  }
+
+  .command-card a {
+    grid-template-columns: 24px minmax(0, 1fr) 16px;
+    width: 100%;
+    transform: none !important;
+  }
+
+  .command-card a:hover {
+    transform: none !important;
+  }
 }
 
 @supports not (overflow-x: clip) {
@@ -2725,143 +3091,157 @@ body,
   }
 }
 
-.background-playground,
-.grain,
-.cursor-aura,
-.cursor-dot,
-.command-overlay,
-.mobile-menu {
-  max-width: 100vw;
-  overflow-x: hidden;
+/* Mobile top navigation: single-line layout */
+@media (max-width: 900px) {
+  .top-nav {
+    top: max(10px, env(safe-area-inset-top));
+    width: calc(100% - 18px);
+    display: flex !important;
+    grid-template-columns: none !important;
+    grid-template-areas: none !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 999px;
+    overflow: visible;
+  }
+
+  .brand-lockup {
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  .brand-lockup span:last-child {
+    display: none;
+  }
+
+  .brand-sigil {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+  }
+
+  .nav-center {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .nav-center a {
+    flex: 0 0 38px;
+    width: 38px;
+    max-width: 38px;
+    height: 38px;
+    min-height: 38px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border-radius: 50%;
+    transform: none !important;
+  }
+
+  .nav-center a span {
+    display: none;
+  }
+
+  .nav-center a svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .nav-center a:hover,
+  .nav-center a.active {
+    color: var(--bg);
+    background: var(--ink);
+    transform: none !important;
+    box-shadow: 0 10px 24px rgba(17, 17, 17, 0.18);
+  }
+
+  .nav-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+    min-width: 0;
+  }
+
+  .icon-button {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+  }
+
+  .nav-cta {
+    min-height: 38px;
+    height: 38px;
+    padding: 0 13px;
+    gap: 7px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .nav-cta svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-cta svg:last-child {
+    display: none;
+  }
 }
 
-.kinetic-marquee,
-.marquee-lanes,
-.marquee-lane {
-  max-width: 100%;
-  overflow: hidden;
-}
+@media (max-width: 420px) {
+  .top-nav {
+    width: calc(100% - 12px);
+    gap: 5px;
+    padding: 7px;
+  }
 
-.marquee-track {
-  max-width: none;
-  overflow: visible;
-  will-change: transform;
-}
-/* Fix command palette internal horizontal scrollbar */
-.command-palette,
-.command-panel,
-.command-modal,
-.command-list,
-.command-results,
-.command-actions {
-  overflow-x: hidden !important;
-  max-width: 100% !important;
-}
+  .brand-sigil,
+  .icon-button {
+    width: 35px;
+    height: 35px;
+    flex-basis: 35px;
+  }
 
-/* Make command rows fit inside the panel */
-.command-item,
-.command-option,
-.command-action,
-.command-row,
-.command-result,
-.command-palette button,
-.command-panel button {
-  box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
-}
+  .nav-center {
+    gap: 2px;
+  }
 
-/* Prevent hover movement from creating horizontal overflow */
-.command-item:hover,
-.command-option:hover,
-.command-action:hover,
-.command-row:hover,
-.command-result:hover,
-.command-palette button:hover,
-.command-panel button:hover {
-  transform: none !important;
-}
+  .nav-center a {
+    flex-basis: 34px;
+    width: 34px;
+    max-width: 34px;
+    height: 34px;
+    min-height: 34px;
+  }
 
-/* Keep text from forcing the row wider */
-.command-item *,
-.command-option *,
-.command-action *,
-.command-row *,
-.command-result *,
-.command-palette button *,
-.command-panel button * {
-  min-width: 0 !important;
-}
+  .nav-center a svg {
+    width: 16px;
+    height: 16px;
+  }
 
-/* Specifically hide horizontal scrollbars inside the command palette */
-.command-palette::-webkit-scrollbar:horizontal,
-.command-panel::-webkit-scrollbar:horizontal,
-.command-list::-webkit-scrollbar:horizontal,
-.command-results::-webkit-scrollbar:horizontal {
-  display: none;
-}
+  .nav-actions {
+    gap: 5px;
+  }
 
-/* Command palette: prevent hover rows from clipping on the right */
-.command-palette,
-.command-panel,
-.command-modal,
-.command-list,
-.command-results,
-.command-actions {
-  overflow-x: hidden !important;
-}
-
-/* Give command rows breathing room inside the panel */
-.command-palette button,
-.command-panel button,
-.command-list button,
-.command-results button,
-.command-actions button,
-.command-item,
-.command-option,
-.command-action,
-.command-row,
-.command-result {
-  width: calc(100% - 16px) !important;
-  max-width: calc(100% - 16px) !important;
-  margin-inline: 8px !important;
-  box-sizing: border-box !important;
-  transform: none !important;
-}
-
-/* Keep hover/focus inside the same width instead of expanding/cutting */
-.command-palette button:hover,
-.command-panel button:hover,
-.command-list button:hover,
-.command-results button:hover,
-.command-actions button:hover,
-.command-item:hover,
-.command-option:hover,
-.command-action:hover,
-.command-row:hover,
-.command-result:hover {
-  transform: none !important;
-  width: calc(100% - 16px) !important;
-  max-width: calc(100% - 16px) !important;
-}
-
-/* Make the active/hover state look intentional without overflowing */
-.command-palette button:hover,
-.command-panel button:hover,
-.command-list button:hover,
-.command-results button:hover,
-.command-actions button:hover {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
-}
-
-/* Keep arrow icons from touching the edge */
-.command-palette button svg:last-child,
-.command-panel button svg:last-child,
-.command-list button svg:last-child,
-.command-results button svg:last-child,
-.command-actions button svg:last-child {
-  flex-shrink: 0 !important;
-  margin-right: 2px !important;
+  .nav-cta {
+    height: 35px;
+    min-height: 35px;
+    padding: 0 11px;
+    font-size: 0.86rem;
+  }
 }
